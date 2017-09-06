@@ -17,8 +17,7 @@ RUN apt-get update \
 && apt-get update \
 && apt-get install -y jenkins \
 && export JENKINS_PORT=$JENKINS_PORT \
-&& echo "${JENKINS_PORT} in dockerfile"
-
+&& echo "${JENKINS_PORT} in dockerfile" \
+&& chmod 777 entrypoint.sh \
 
 ENTRYPOINT ["./entrypoint.sh"]
-#ENTRYPOINT ["bash"]
