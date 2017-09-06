@@ -3,6 +3,7 @@ FROM debian:latest
 ENV JENKINS_PORT 8080
 
 EXPOSE $JENKINS_PORT
+COPY entrypoint.sh /entrypoint.sh 
 
 RUN apt-get update \ 
 && apt-get install -y wget \
@@ -14,6 +15,9 @@ RUN apt-get update \
 && echo deb http://pkg.jenkins.io/debian-stable binary/ | tee /etc/apt/sources.list.d/jenkins.list \
 && apt-get update \
 && apt-get install -y jenkins \
-&& export HTTPPORT=$JENKINS_PORT
+&& export JENKINS_PORT=$JENKINS_PORT \
+&& echo "${JENKINS_PORT} in dockerfile"
 
-CMD ["java", "-Dfile.encoding=UTF-8", "-Dmail.smtp.starttls.enable=true", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
+ENTRYPOINT ["entrypoint.sh"]
+
+#CMD ["java", "-Dfile.encoding=UTF-8", "-Dmail.smtp.starttls.enable=true", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
