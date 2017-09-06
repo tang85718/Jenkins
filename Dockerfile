@@ -20,6 +20,5 @@ RUN apt-get update \
 && echo "${JENKINS_PORT} in dockerfile"
 
 
-ENTRYPOINT ["entrypoint.sh"]
-
-#CMD ["java", "-Dfile.encoding=UTF-8", "-Dmail.smtp.starttls.enable=true", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
+#ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["bash"]
