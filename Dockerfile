@@ -9,10 +9,8 @@ RUN apt-get update \
 && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 && apt-get install -y nodejs \
 && wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add - \
-&& echo deb http://pkg.jenkins.io/debian-stable binary/ | tee /etc/apt/sources.list.d/jenkins.list
+&& echo deb http://pkg.jenkins.io/debian-stable binary/ | tee /etc/apt/sources.list.d/jenkins.list \
 && apt-get update \
-&& apt-get install -y jenkins \
-
+&& apt-get install -y jenkins
 
 CMD ["java", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
-
