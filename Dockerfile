@@ -16,4 +16,4 @@ RUN apt-get update \
 && apt-get install -y jenkins \
 && export HTTPPORT=$JENKINS_PORT
 
-CMD ["java", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
+CMD ["java", "-Dfile.encoding=UTF-8", "-Dmail.smtp.starttls.enable=true", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
