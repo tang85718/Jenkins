@@ -20,5 +20,5 @@ RUN apt-get update \
 && echo "${JENKINS_PORT} in dockerfile"
 
 
-#ENTRYPOINT ["entrypoint.sh"]
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["./entrypoint.sh"]
+#ENTRYPOINT ["bash"]
