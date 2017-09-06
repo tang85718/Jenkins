@@ -1,9 +1,10 @@
 FROM debian:latest
 
-ENV JENKINS_PORT 8080
+ENV JENKINS_PORT 8081
 
 EXPOSE $JENKINS_PORT
-COPY entrypoint.sh /entrypoint.sh 
+WORKDIR /
+COPY entrypoint.sh /
 
 RUN apt-get update \ 
 && apt-get install -y wget \
@@ -17,6 +18,7 @@ RUN apt-get update \
 && apt-get install -y jenkins \
 && export JENKINS_PORT=$JENKINS_PORT \
 && echo "${JENKINS_PORT} in dockerfile"
+
 
 ENTRYPOINT ["entrypoint.sh"]
 
