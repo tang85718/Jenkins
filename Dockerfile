@@ -1,6 +1,8 @@
 FROM debian:latest
 
-ENV HTTPPORT 8080
+ENV JENKINS_PORT 8080
+
+EXPOSE $JENKINS_PORT
 
 RUN apt-get update \ 
 && apt-get install -y wget \
@@ -11,6 +13,7 @@ RUN apt-get update \
 && wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add - \
 && echo deb http://pkg.jenkins.io/debian-stable binary/ | tee /etc/apt/sources.list.d/jenkins.list \
 && apt-get update \
-&& apt-get install -y jenkins
+&& apt-get install -y jenkins \
+&& export HTTPPORT=$JENKINS_PORT
 
 CMD ["java", "-jar", "/usr/share/jenkins/jenkins.war", "--httpPort=$HTTPPORT"]
