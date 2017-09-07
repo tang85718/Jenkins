@@ -1,8 +1,12 @@
 FROM debian:latest
 
+VOLUME /data
+
 ENV JENKINS_PORT 8081
+ENV JENKINS_HOME /data/jenkins/home
 
 EXPOSE $JENKINS_PORT
+
 WORKDIR /
 COPY entrypoint.sh /
 
@@ -18,8 +22,6 @@ RUN apt-get update \
 && apt-get install -y jenkins \
 && export JENKINS_PORT=$JENKINS_PORT \
 && echo "${JENKINS_PORT} in dockerfile" \
-&& ls -ls \
-&& chmod 777 entrypoint.sh \
-&& ls -ls
+&& chmod 777 entrypoint.sh && ls 
 
 ENTRYPOINT ["./entrypoint.sh"]
